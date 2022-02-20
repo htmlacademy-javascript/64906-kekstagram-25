@@ -1,17 +1,14 @@
 // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
 
 const getRandomNumber = (a, b) => {
-  const swapValues = () => {
-    const swap = a;
-    a = Math.ceil(b);
-    b = Math.floor(swap);
-  };
-  if(Math.min(a, b) < 0) {
+  if (a < 0 || b < 0) {
     return 0;
-  } else if (a === b){
+  }
+  if (a === b) {
     return a;
-  } else if (a > b) {
-    swapValues();
+  }
+  if (a > b) {
+    [a, b] = [b, a];
   }
   a = Math.ceil(a);
   b = Math.floor(b);
