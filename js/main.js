@@ -1,4 +1,4 @@
-const COMMENTS = [
+const COMMENT_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -7,7 +7,7 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const NAMES = [
+const COMMENT_USERS = [
   'Анастасия',
   'Олег',
   'Игорь',
@@ -55,8 +55,8 @@ const uniqCommentId = getUniqRandomNumber(20);
 const generateComment = () => ({
   id: uniqCommentId(),
   avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-  message: COMMENTS[getRandomNumber(0, COMMENTS.length - 1)],
-  name: NAMES[getRandomNumber(0, NAMES.length - 1)],
+  message: COMMENT_MESSAGES[getRandomNumber(0, COMMENT_MESSAGES.length - 1)],
+  name: COMMENT_USERS[getRandomNumber(0, COMMENT_USERS.length - 1)],
 });
 
 const generatePhotoDescription = (id) => ({
