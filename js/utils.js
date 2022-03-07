@@ -1,18 +1,18 @@
-const checkStringLength = (string, maxLength) => string.length <= maxLength;
+// const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-const getRandomNumber = (a, b) => {
-  if (a < 0 || b < 0) {
+const getRandomPositiveNumber = (from, to) => {
+  if (from < 0 || to < 0) {
     return 0;
   }
-  if (a === b) {
-    return a;
+  if (from === to) {
+    return from;
   }
-  if (a > b) {
-    [a, b] = [b, a];
+  if (from > to) {
+    [from, to] = [to, from];
   }
-  a = Math.ceil(a);
-  b = Math.floor(b);
-  return Math.floor(Math.random() * (b - a + 1)) + a;
+  const min = Math.ceil(from);
+  const max = Math.floor(to);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const getUniqRandomNumber = (maxStep) => {
@@ -22,7 +22,7 @@ const getUniqRandomNumber = (maxStep) => {
     if (maxStep === 1) {
       return ++currentNumber;
     }
-    currentNumber += getRandomNumber(1, maxStep);
+    currentNumber += getRandomPositiveNumber(1, maxStep);
 
     return currentNumber;
   }
@@ -30,4 +30,4 @@ const getUniqRandomNumber = (maxStep) => {
   return getNextNumber;
 };
 
-export {getRandomNumber, getUniqRandomNumber};
+export {getRandomPositiveNumber, getUniqRandomNumber};

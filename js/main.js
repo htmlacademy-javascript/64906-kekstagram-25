@@ -1,2 +1,3 @@
-import '/js/data.js';
-import '/js/utils.js';
+import {photoDescriptions} from '/js/mock.js';
+
+console.log(photoDescriptions);
