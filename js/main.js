@@ -1,3 +1,3 @@
-import {photoDescriptions} from '/js/mock.js';
+import {renderOtherPhotos} from '/js/renderOtherPhotos.js';
 
-console.log(photoDescriptions);
+renderOtherPhotos();
