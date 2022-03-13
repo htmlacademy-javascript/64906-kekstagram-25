@@ -1,4 +1,4 @@
-import {photoDescriptions} from '/js/mock.js';
+import {photoDescriptions} from './mock.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
