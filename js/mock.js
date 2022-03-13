@@ -1,5 +1,5 @@
-import {getRandomPositiveNumber, getUniqRandomNumber} from '/js/utils.js';
-import {COMMENT_MESSAGES, COMMENT_USERS, PHOTO_DESCRIPTIONS_COUNT} from '/js/data.js';
+import {getRandomPositiveNumber, getUniqRandomNumber} from './utils.js';
+import {COMMENT_MESSAGES, COMMENT_USERS, PHOTO_DESCRIPTIONS_COUNT} from './data.js';
 
 const uniqCommentId = getUniqRandomNumber(20);
 
