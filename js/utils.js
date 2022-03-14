@@ -15,15 +15,21 @@ const getRandomPositiveNumber = (from, to) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const getUniqRandomNumber = (maxStep) => {
-  let currentNumber = 0;
+const getUniqRandomNumber = (quantity) => {
+  const pastNums = [];
 
   function getNextNumber () {
-    if (maxStep === 1) {
+    let currentNumber = getRandomPositiveNumber(1, quantity);
+    if (quantity === 1) {
       return ++currentNumber;
     }
-    currentNumber += getRandomPositiveNumber(1, maxStep);
-
+    if(pastNums.length >= quantity) {
+      return ++pastNums.length;
+    }
+    while(pastNums.includes(currentNumber)) {
+      currentNumber = getRandomPositiveNumber(1, quantity);
+    }
+    pastNums.push(currentNumber);
     return currentNumber;
   }
 
