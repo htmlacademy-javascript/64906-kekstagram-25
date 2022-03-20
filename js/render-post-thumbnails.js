@@ -4,7 +4,7 @@ const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesFragment = document.createDocumentFragment();
 
-const renderOtherPhotos = () => {
+function renderPostThumbnails() {
   photoDescriptions.forEach(({url, likes, comments}) => {
     const pictureElement = picturesTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
@@ -14,6 +14,6 @@ const renderOtherPhotos = () => {
   });
 
   picturesContainer.appendChild(picturesFragment);
-};
+}
 
-export {renderOtherPhotos};
+export {renderPostThumbnails};
