@@ -1,19 +1,19 @@
 import {isEscapeKey, checkStringLength} from './utils.js';
-import {hashtagInput, descriptionArea} from './form-modal.js';
+import {hashtagInputElement, descriptionAreaElement} from './form-modal.js';
 
 const COMMENT_MAX_LENGTH = 140;
 const HASHTAG_REG_EXP = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
-const uploadForm = document.querySelector('#upload-select-image');
+const uploadFormElement = document.querySelector('#upload-select-image');
 
-const pristine = new Pristine(uploadForm, {
+const pristine = new Pristine(uploadFormElement, {
   classTo: 'form-group',
   errorTextTag: 'span',
   errorTextClass: 'invalid',
 });
 
 pristine.addValidator(
-  hashtagInput,
+  hashtagInputElement,
   (value) => {
     if(value === '') {
       return true;
@@ -27,7 +27,7 @@ pristine.addValidator(
 );
 
 pristine.addValidator(
-  hashtagInput,
+  hashtagInputElement,
   (value) => {
     const hashtags = value.split(' ');
     return hashtags.length <= 5;
@@ -38,7 +38,7 @@ pristine.addValidator(
 );
 
 pristine.addValidator(
-  hashtagInput,
+  hashtagInputElement,
   (value) => {
     const hashtags = value.toLowerCase().split(' ');
     return hashtags.every((hashtag) => hashtags.filter((tag) => tag === hashtag).length === 1);
@@ -48,21 +48,21 @@ pristine.addValidator(
   false
 );
 
-pristine.addValidator(descriptionArea, (value) => checkStringLength(value, COMMENT_MAX_LENGTH), `Не более ${COMMENT_MAX_LENGTH} символов`, 1, false);
+pristine.addValidator(descriptionAreaElement, (value) => checkStringLength(value, COMMENT_MAX_LENGTH), `Не более ${COMMENT_MAX_LENGTH} символов`, 1, false);
 
-hashtagInput.addEventListener('keydown', (evt) => {
+hashtagInputElement.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt)) {
     evt.stopPropagation();
   }
 });
 
-descriptionArea.addEventListener('keydown', (evt) => {
+descriptionAreaElement.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt)) {
     evt.stopPropagation();
   }
 });
 
-uploadForm.addEventListener('submit', (evt) => {
+uploadFormElement.addEventListener('submit', (evt) => {
   const formIsValid = pristine.validate();
   if(!formIsValid) {
     evt.preventDefault();

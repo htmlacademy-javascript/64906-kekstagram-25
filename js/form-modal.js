@@ -1,42 +1,43 @@
 import {isEscapeKey} from './utils.js';
 
-const pageBody = document.querySelector('body');
-const uploadControl = document.querySelector('#upload-file');
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const scaleControlValue = document.querySelector('.scale__control--value');
-const defaultScaleControlValue = scaleControlValue.value;
-const effectLevelValue = document.querySelector('.effect-level__value');
-const hashtagInput = document.querySelector('.text__hashtags');
-const descriptionArea = document.querySelector('.text__description');
-const defaultImageEffect = document.querySelector('#effect-none');
-const closeBtn = uploadOverlay.querySelector('.img-upload__cancel');
+const IMAGE_SCALE_VALUE = 100;
 
-function uploadNewImage(evt) {
-  evt.preventDefault();
-  uploadOverlay.classList.remove('hidden');
-  pageBody.classList.add('modal-open');
-  closeBtn.addEventListener('click', cancelUpload);
+const bodyElement = document.body;
+const uploadControlElement = document.querySelector('#upload-file');
+const uploadOverlayElement = document.querySelector('.img-upload__overlay');
+const imageScaleValueElement = document.querySelector('.scale__control--value');
+const imageEffectLevelValueElement = document.querySelector('.effect-level__value');
+const hashtagInputElement = document.querySelector('.text__hashtags');
+const descriptionAreaElement = document.querySelector('.text__description');
+const defaultImageEffectElement = document.querySelector('#effect-none');
+const closeBtnElement = uploadOverlayElement.querySelector('.img-upload__cancel');
+
+function uploadNewImage() {
+  uploadOverlayElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
+  closeBtnElement.addEventListener('click', cancelUpload);
 }
 
 function cancelUpload() {
-  uploadOverlay.classList.add('hidden');
-  pageBody.classList.remove('modal-open');
-  uploadControl.value = '';
-  scaleControlValue.value = defaultScaleControlValue;
-  effectLevelValue.value = '';
-  hashtagInput.value = '';
-  descriptionArea.value = '';
-  defaultImageEffect.checked = true;
-  closeBtn.removeEventListener('click', cancelUpload);
+  uploadOverlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  uploadControlElement.value = '';
+  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
+  imageEffectLevelValueElement.value = '';
+  hashtagInputElement.value = '';
+  descriptionAreaElement.value = '';
+  defaultImageEffectElement.checked = true;
+  closeBtnElement.removeEventListener('click', cancelUpload);
 }
 
-uploadControl.addEventListener('change', uploadNewImage);
+uploadControlElement.addEventListener('change', uploadNewImage);
 
-pageBody.addEventListener('keydown', (evt) => {
+bodyElement.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     cancelUpload();
   }
 });
 
-export {hashtagInput, descriptionArea};
+export {hashtagInputElement, descriptionAreaElement};
