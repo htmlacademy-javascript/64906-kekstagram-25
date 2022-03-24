@@ -12,11 +12,20 @@ const descriptionAreaElement = document.querySelector('.text__description');
 const defaultImageEffectElement = document.querySelector('#effect-none');
 const closeBtnElement = uploadOverlayElement.querySelector('.img-upload__cancel');
 
+closeBtnElement.addEventListener('click', cancelUpload);
+
+function onCloseFromKeyboard(evt) {
+  if(isEscapeKey(evt)) {
+    evt.preventDefault();
+    cancelUpload();
+  }
+}
+
 function uploadNewImage() {
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   imageScaleValueElement.value = IMAGE_SCALE_VALUE;
-  closeBtnElement.addEventListener('click', cancelUpload);
+  bodyElement.addEventListener('keydown', onCloseFromKeyboard);
 }
 
 function cancelUpload() {
@@ -28,16 +37,9 @@ function cancelUpload() {
   hashtagInputElement.value = '';
   descriptionAreaElement.value = '';
   defaultImageEffectElement.checked = true;
-  closeBtnElement.removeEventListener('click', cancelUpload);
+  bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
 }
 
 uploadControlElement.addEventListener('change', uploadNewImage);
-
-bodyElement.addEventListener('keydown', (evt) => {
-  if(isEscapeKey(evt)) {
-    evt.preventDefault();
-    cancelUpload();
-  }
-});
 
 export {hashtagInputElement, descriptionAreaElement};
