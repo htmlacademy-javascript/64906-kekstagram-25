@@ -1,3 +1,4 @@
-import {renderOtherPhotos} from './renderOtherPhotos.js';
+import {renderPostThumbnails} from './render-post-thumbnails.js';
+import './form.js';
 
-renderOtherPhotos();
+renderPostThumbnails();

@@ -1,4 +1,4 @@
-// const checkStringLength = (string, maxLength) => string.length <= maxLength;
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
 const getRandomPositiveNumber = (from, to) => {
   if (from < 0 || to < 0) {
@@ -36,4 +36,8 @@ const getUniqRandomNumber = (quantity) => {
   return getNextNumber;
 };
 
-export {getRandomPositiveNumber, getUniqRandomNumber};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+// const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {checkStringLength, getRandomPositiveNumber, getUniqRandomNumber, isEscapeKey};
