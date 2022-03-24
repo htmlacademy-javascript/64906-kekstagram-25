@@ -1416,3 +1416,18 @@ main {
 .hidden {
   display: none;
 }
+
+.form-group {
+  position: relative;
+}
+
+.invalid {
+  position: absolute;
+  top: 0;
+  left: 93%;
+  text-transform: initial;
+  max-width: 20vw;
+  width: fit-content;
+  color: tomato;
+  text-align: left;
+}
