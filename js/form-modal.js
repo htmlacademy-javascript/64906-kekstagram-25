@@ -6,6 +6,7 @@ const bodyElement = document.body;
 const uploadControlElement = document.querySelector('#upload-file');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const imageScaleValueElement = document.querySelector('.scale__control--value');
+const imageeffectLevelElement = document.querySelector('.effect-level');
 const imageEffectLevelValueElement = document.querySelector('.effect-level__value');
 const hashtagInputElement = document.querySelector('.text__hashtags');
 const descriptionAreaElement = document.querySelector('.text__description');
@@ -22,6 +23,7 @@ function onCloseFromKeyboard(evt) {
 }
 
 function uploadNewImage() {
+  imageeffectLevelElement.classList.add('hidden');
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   imageScaleValueElement.value = IMAGE_SCALE_VALUE;
