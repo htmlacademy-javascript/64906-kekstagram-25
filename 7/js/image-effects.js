@@ -1,6 +1,6 @@
 const sliderElement = document.querySelector('.effect-level__slider');
 const uploadedImageElement = document.querySelector('.img-upload__preview img');
-const effectsListNode = document.querySelector('.effects__list');
+const effectsListElement = document.querySelector('.effects__list');
 const effectLevelElement = document.querySelector('.effect-level');
 const effectLevelValueElement = effectLevelElement.querySelector('.effect-level__value');
 const imageScaleValueElement = document.querySelector('.scale__control--value');
@@ -32,7 +32,7 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-effectsListNode.addEventListener('click', (evt) => {
+effectsListElement.addEventListener('click', (evt) => {
   if(evt.target.checked) {
     effectLevelElement.classList.remove('hidden');
     uploadedImageElement.removeAttribute('class');
