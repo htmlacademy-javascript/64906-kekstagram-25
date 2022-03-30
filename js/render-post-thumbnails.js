@@ -14,4 +14,4 @@ function renderPostThumbnails(photoDescriptions) {
   picturesContainer.appendChild(picturesFragment);
 }
 
-export {renderPostThumbnails};
+renderPostThumbnails();
