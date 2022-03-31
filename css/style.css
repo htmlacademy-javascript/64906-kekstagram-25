@@ -1432,3 +1432,49 @@ main {
   color: tomato;
   text-align: left;
 }
+
+.error-msg {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: transparent;
+  color: #F0F0F0;
+  border: 1px solid tomato;
+  border-radius: 4px;
+  text-transform: none;
+  z-index: 1;
+}
+
+.error-msg__close-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  margin-left: 4px;
+  border-color: transparent;
+  background-color: transparent;
+  transition: transform 125ms;
+}
+
+.error-msg__close-btn:hover {
+  transform: scale(1.1);
+}
+
+.error-msg__close-btn:active {
+  transform: scale(0.9);
+}
+
+.error-msg__close-btn::after {
+  content: "✕";
+  display: block;
+  width: 20px;
+  height: 20px;
+}
