@@ -1,10 +1,12 @@
 import {isEscapeKey, checkStringLength} from './utils.js';
-import {hashtagInputElement, descriptionAreaElement} from './form-modal.js';
 
 const COMMENT_MAX_LENGTH = 140;
 const HASHTAG_REG_EXP = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
+const hashtagInputElement = document.querySelector('.text__hashtags');
+const descriptionAreaElement = document.querySelector('.text__description');
 const uploadFormElement = document.querySelector('#upload-select-image');
+const uploadBtnElement = uploadFormElement.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadFormElement, {
   classTo: 'form-group',
@@ -62,9 +64,18 @@ descriptionAreaElement.addEventListener('keydown', (evt) => {
   }
 });
 
-uploadFormElement.addEventListener('submit', (evt) => {
-  const formIsValid = pristine.validate();
-  if(!formIsValid) {
+const initUploadFormValidation = (onSuccessValidation) => {
+  uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+
+    const formIsValid = pristine.validate();
+
+    if(formIsValid) {
+      uploadBtnElement.disabled = true;
+      const formData = new FormData(evt.target);
+      onSuccessValidation(formData);
+    }
+  });
+};
+
+export {initUploadFormValidation};

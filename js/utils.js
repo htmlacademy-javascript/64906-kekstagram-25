@@ -38,18 +38,4 @@ const getUniqRandomNumber = (quantity) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-// const isEnterKey = (evt) => evt.key === 'Enter';
-
-const showNotification = (errorMsg) => {
-  const errorMsgContainer = document.createElement('div');
-  const errorMsgCloseBtn = document.createElement('button');
-  errorMsgCloseBtn.classList.add('error-msg__close-btn');
-  errorMsgContainer.classList.add('error-msg');
-  errorMsgContainer.textContent = errorMsg;
-  errorMsgContainer.appendChild(errorMsgCloseBtn);
-  document.body.appendChild(errorMsgContainer);
-
-  errorMsgCloseBtn.addEventListener('click', () => errorMsgContainer.remove());
-};
-
-export {checkStringLength, getRandomPositiveNumber, getUniqRandomNumber, isEscapeKey, showNotification};
+export {checkStringLength, getRandomPositiveNumber, getUniqRandomNumber, isEscapeKey};

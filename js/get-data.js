@@ -1,7 +1,10 @@
-import {renderPostThumbnails} from './render-post-thumbnails.js';
-import {showNotification} from './utils.js';
+import {showAlert} from './notifications.js';
 
-fetch('https://25.javascript.pages.academy/kekstagram/data')
-  .then((data) => data.json())
-  .then((images) => renderPostThumbnails(images))
-  .catch((err) => showNotification(err));
+const getPostsFromServer = (cb) => {
+  fetch('https://25.javascript.pages.academy/kekstagram/data')
+    .then((data) => data.json())
+    .then((images) => cb(images))
+    .catch((err) => showAlert(err));
+};
+
+export {getPostsFromServer};
