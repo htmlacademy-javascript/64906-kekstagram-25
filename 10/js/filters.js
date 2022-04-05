@@ -1,4 +1,5 @@
 import {renderPostThumbnails} from './render-post-thumbnails.js';
+import {debounce} from './utils.js';
 
 const DEBOUNCE_TIME = 500;
 const RANDOM_PHOTO_MAX_QUANTITY = 10;
@@ -35,8 +36,7 @@ const showFilters = (photos) => {
     });
 
     evt.target.classList.add('img-filters__button--active');
-
-    setTimeout(() => filterItems(photos, evt.target.id), DEBOUNCE_TIME);
+    debounce(() => filterItems(photos, evt.target.id), DEBOUNCE_TIME);
   });
 };
 
