@@ -21,7 +21,7 @@ const filterItems = (photos, filter) => {
     renderPostThumbnails(photos.slice(0, RANDOM_PHOTO_MAX_QUANTITY));
   }
   if(filter.endsWith('discussed')) {
-    photos.sort((a,b) => a.comments.length - b.comments.length);
+    photos.sort((previousPhoto, nextPhoto) => nextPhoto.comments.length - previousPhoto.comments.length);
     renderPostThumbnails(photos);
   }
 };
