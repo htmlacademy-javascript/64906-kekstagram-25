@@ -4,5 +4,9 @@ import './form.js';
 import './image-editor.js';
 import './network.js';
 import './notifications.js';
+import {showFilters} from './filters.js';
 
-getPostsFromServer(renderPostThumbnails);
+getPostsFromServer((posts) => {
+  renderPostThumbnails(posts);
+  showFilters(posts);
+});
