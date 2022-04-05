@@ -15,6 +15,7 @@ const filterItems = (photos, filter) => {
   });
 
   if(filter.endsWith('default')) {
+    photos.sort((previousPhoto, nextPhoto) => previousPhoto.id - nextPhoto.id);
     renderPostThumbnails(photos);
   }
   if(filter.endsWith('random')) {
