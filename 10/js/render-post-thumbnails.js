@@ -3,6 +3,8 @@ const picturesTemplate = document.querySelector('#picture').content.querySelecto
 const picturesFragment = document.createDocumentFragment();
 
 const renderPostThumbnails = (photoDescriptions) => {
+  picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
+
   photoDescriptions.forEach(({url, likes, comments}) => {
     const pictureElement = picturesTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;

@@ -7,13 +7,10 @@ const RANDOM_PHOTO_MAX_QUANTITY = 10;
 const imageFiltersElement = document.querySelector('.img-filters');
 const imageFiltersListElement = imageFiltersElement.querySelector('.img-filters__form');
 const imageFilterBtnElement = imageFiltersListElement.querySelectorAll('.img-filters__button');
-const picturesContainer = document.querySelector('.pictures');
 
 const filterItems = (photos, filter) => {
-  picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
 
   if(filter.id.endsWith('default')) {
-    photos.sort((previousPhoto, nextPhoto) => previousPhoto.id - nextPhoto.id);
     renderPostThumbnails(photos);
   }
   if(filter.id.endsWith('random')) {
@@ -26,22 +23,25 @@ const filterItems = (photos, filter) => {
   }
 };
 
-const setFilterHandlers = (photos) => {
-  imageFilterBtnElement.forEach((filterBtn) => {
-    filterBtn.addEventListener('click', debounce(() => filterItems(photos, filterBtn), DEBOUNCE_TIME));
-  });
-};
-
-const showFilters = (photos) => {
+const showFilters = () => {
   imageFiltersElement.classList.remove('img-filters--inactive');
-  setFilterHandlers(photos);
 };
 
-imageFiltersListElement.addEventListener('click', (evt) => {
-  imageFilterBtnElement.forEach((filterBtn) => {
-    filterBtn.classList.remove('img-filters__button--active');
-  });
-  evt.target.classList.add('img-filters__button--active');
-});
+const setFilterHandlers = (photos) => {
+  const filterHandler = debounce(filterItems, DEBOUNCE_TIME);
 
-export {showFilters};
+  imageFilterBtnElement.forEach((filterBtn) => {
+    filterBtn.addEventListener('click', () => {
+      filterHandler.call(this, photos.slice(), filterBtn);
+    });
+  });
+
+  imageFiltersListElement.addEventListener('click', (evt) => {
+    imageFilterBtnElement.forEach((filterBtn) => {
+      filterBtn.classList.remove('img-filters__button--active');
+    });
+    evt.target.classList.add('img-filters__button--active');
+  });
+};
+
+export {showFilters, setFilterHandlers};
