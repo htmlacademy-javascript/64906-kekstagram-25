@@ -4,9 +4,10 @@ import './form.js';
 import './image-editor.js';
 import './network.js';
 import './notifications.js';
-import {showFilters} from './filters.js';
+import {showFilters, setFilterHandlers} from './filters.js';
 
 getPostsFromServer((posts) => {
   renderPostThumbnails(posts);
-  showFilters(posts);
+  showFilters();
+  setFilterHandlers(posts);
 });
