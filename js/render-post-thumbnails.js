@@ -2,7 +2,9 @@ const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesFragment = document.createDocumentFragment();
 
-function renderPostThumbnails(photoDescriptions) {
+const renderPostThumbnails = (photoDescriptions) => {
+  picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
+
   photoDescriptions.forEach(({url, likes, comments}) => {
     const pictureElement = picturesTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = url;
@@ -12,6 +14,6 @@ function renderPostThumbnails(photoDescriptions) {
   });
 
   picturesContainer.appendChild(picturesFragment);
-}
+};
 
 export {renderPostThumbnails};
