@@ -1,5 +1,6 @@
 import {renderPostThumbnails} from './render-post-thumbnails.js';
 import {debounce} from './utils.js';
+import {setThumbnailsHandlers} from './fullsize-image.js';
 
 const DEBOUNCE_TIME = 500;
 const RANDOM_PHOTO_MAX_QUANTITY = 10;
@@ -12,14 +13,17 @@ const filterItems = (photos, filter) => {
 
   if(filter.id.endsWith('default')) {
     renderPostThumbnails(photos);
+    setThumbnailsHandlers(photos);
   }
   if(filter.id.endsWith('random')) {
     photos.sort(() => Math.random() - 0.5);
     renderPostThumbnails(photos.slice(0, RANDOM_PHOTO_MAX_QUANTITY));
+    setThumbnailsHandlers(photos);
   }
   if(filter.id.endsWith('discussed')) {
     photos.sort((previousPhoto, nextPhoto) => nextPhoto.comments.length - previousPhoto.comments.length);
     renderPostThumbnails(photos);
+    setThumbnailsHandlers(photos);
   }
 };
 
