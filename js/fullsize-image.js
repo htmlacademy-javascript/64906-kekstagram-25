@@ -2,13 +2,13 @@ import {isEscapeKey} from './utils.js';
 
 const bodyElement = document.body;
 const overlayElement = document.querySelector('.big-picture');
-const largeImageElement = document.querySelector('.big-picture__img img');
-const largeImageLikesElement = document.querySelector('.likes-count');
-const largeImageCommentsListElement = document.querySelector('.social__comments');
-const commentsCounterElement = document.querySelector('.comments-count');
-const commentsCounterBlockElement = document.querySelector('.social__comment-count');
-const largeImageDescriptionElement = document.querySelector('.social__caption');
-const newCommentsLoaderElement = document.querySelector('.comments-loader');
+const largeImageElement = overlayElement.querySelector('.big-picture__img img');
+const largeImageLikesElement = overlayElement.querySelector('.likes-count');
+const largeImageCommentsListElement = overlayElement.querySelector('.social__comments');
+const commentsCounterElement = overlayElement.querySelector('.comments-count');
+const commentsCounterBlockElement = overlayElement.querySelector('.social__comment-count');
+const largeImageDescriptionElement = overlayElement.querySelector('.social__caption');
+const newCommentsLoaderElement = overlayElement.querySelector('.comments-loader');
 const closeBtnElement = overlayElement.querySelector('.big-picture__cancel');
 
 closeBtnElement.addEventListener('click', closeModal);
@@ -31,16 +31,16 @@ function setThumbnailsHandlers(posts) {
   });
 }
 
-function renderComment(comment) {
+function renderComment({avatar, name, message}) {
   const commentItem = document.createElement('li');
   commentItem.classList.add('social__comment');
   commentItem.innerHTML = `
         <img
             class="social__picture"
-            src="${comment.avatar}"
-            alt="${comment.name}"
+            src="${avatar}"
+            alt="${name}"
             width="35" height="35">
-        <p class="social__text">${comment.message}</p>
+        <p class="social__text">${message}</p>
 `;
 
   largeImageCommentsListElement.appendChild(commentItem);
