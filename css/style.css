@@ -1440,13 +1440,14 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-width: 32vw;
   padding: 4px 8px;
   background-color: transparent;
   color: #F0F0F0;
   border: 1px solid tomato;
   border-radius: 4px;
   text-transform: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .error-msg__close-btn {

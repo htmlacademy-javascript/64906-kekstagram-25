@@ -1,6 +1,9 @@
 import {isEscapeKey} from './utils.js';
+import {showAlert} from './notifications.js';
 
 const IMAGE_SCALE_VALUE = 100;
+const FILE_TYPES = ['jpeg', 'png', 'jpg', 'gif'];
+const INCORRECT_IMAGE_FORMAT = `Не подходящий формат изображения, используйте следующие форматы: ${FILE_TYPES.join(', ')}`;
 
 const bodyElement = document.body;
 const uploadControlElement = document.querySelector('#upload-file');
@@ -47,6 +50,23 @@ function closeUploadWindow() {
   bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
 }
 
-uploadControlElement.addEventListener('change', openUploadWindow);
+function uploadChosenImage() {
+  const image = uploadControlElement.files[0];
+  const imageName = image.name.toLowerCase();
+
+  const match = FILE_TYPES.some((type) => imageName.endsWith(type));
+
+  if(match) {
+    uploadedImageElement.src = URL.createObjectURL(image);
+  } else {
+    showAlert(INCORRECT_IMAGE_FORMAT);
+    closeUploadWindow();
+  }
+}
+
+uploadControlElement.addEventListener('change', () => {
+  openUploadWindow();
+  uploadChosenImage();
+});
 
 export {closeUploadWindow};
