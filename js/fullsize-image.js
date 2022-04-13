@@ -46,18 +46,18 @@ function renderComment({avatar, name, message}) {
   largeImageCommentsListElement.appendChild(commentItem);
 }
 
-function openModal(post) {
+function openModal({url, likes, comments, description}) {
   bodyElement.classList.add('modal-open');
   overlayElement.classList.remove('hidden');
-  largeImageElement.src = post.url;
-  largeImageLikesElement.textContent = post.likes;
-  commentsCounterElement.textContent = post.comments.length;
+  largeImageElement.src = url;
+  largeImageLikesElement.textContent = likes;
+  commentsCounterElement.textContent = comments.length;
   largeImageCommentsListElement.innerHTML = '';
-  largeImageDescriptionElement.textContent = post.description;
+  largeImageDescriptionElement.textContent = description;
   commentsCounterBlockElement.classList.add('hidden');
   newCommentsLoaderElement.classList.add('hidden');
 
-  post.comments.forEach((comment) => {
+  comments.forEach((comment) => {
     renderComment(comment);
   });
   bodyElement.addEventListener('keydown', onCloseFromKeyboard);
