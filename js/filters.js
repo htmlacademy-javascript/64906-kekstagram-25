@@ -10,7 +10,6 @@ const imageFiltersListElement = imageFiltersElement.querySelector('.img-filters_
 const imageFilterBtnElement = imageFiltersListElement.querySelectorAll('.img-filters__button');
 
 const filterItems = (photos, filter) => {
-
   if(filter.id.endsWith('default')) {
     renderPostThumbnails(photos);
     setThumbnailsHandlers(photos);

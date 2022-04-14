@@ -2,6 +2,8 @@ import {isEscapeKey} from './utils.js';
 
 const COMMENTS_CHUNK_COUNT = 5;
 
+let postComments = [];
+
 const bodyElement = document.body;
 const overlayElement = document.querySelector('.big-picture');
 const largeImageElement = overlayElement.querySelector('.big-picture__img img');
@@ -12,10 +14,6 @@ const commentsCounterElement = overlayElement.querySelector('.comments-count');
 const largeImageDescriptionElement = overlayElement.querySelector('.social__caption');
 const newCommentsLoaderElement = overlayElement.querySelector('.comments-loader');
 const closeBtnElement = overlayElement.querySelector('.big-picture__cancel');
-
-let postComments = [];
-
-closeBtnElement.addEventListener('click', closeModal);
 
 function onCloseFromKeyboard(evt) {
   if(isEscapeKey(evt)) {
@@ -33,14 +31,6 @@ function setThumbnailsHandlers(posts) {
     });
   });
 }
-
-newCommentsLoaderElement.addEventListener(
-  'click',
-  () => {
-    postComments.splice(0, COMMENTS_CHUNK_COUNT).forEach((comment) => renderComment(comment));
-    renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
-  }
-);
 
 function renderComment({avatar, name, message}) {
   newCommentsLoaderElement.classList.add('hidden');
@@ -82,5 +72,15 @@ function closeModal() {
   overlayElement.classList.add('hidden');
   bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
 }
+
+newCommentsLoaderElement.addEventListener(
+  'click',
+  () => {
+    postComments.splice(0, COMMENTS_CHUNK_COUNT).forEach((comment) => renderComment(comment));
+    renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
+  }
+);
+
+closeBtnElement.addEventListener('click', closeModal);
 
 export {setThumbnailsHandlers};

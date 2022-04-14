@@ -14,6 +14,20 @@ const pristine = new Pristine(uploadFormElement, {
   errorTextClass: 'invalid',
 });
 
+const initUploadFormValidation = (onSuccessValidation) => {
+  uploadFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formIsValid = pristine.validate();
+
+    if(formIsValid) {
+      uploadBtnElement.disabled = true;
+      const formData = new FormData(evt.target);
+      onSuccessValidation(formData);
+    }
+  });
+};
+
 pristine.addValidator(
   hashtagInputElement,
   (value) => {
@@ -63,19 +77,5 @@ descriptionAreaElement.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
   }
 });
-
-const initUploadFormValidation = (onSuccessValidation) => {
-  uploadFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formIsValid = pristine.validate();
-
-    if(formIsValid) {
-      uploadBtnElement.disabled = true;
-      const formData = new FormData(evt.target);
-      onSuccessValidation(formData);
-    }
-  });
-};
 
 export {initUploadFormValidation};
