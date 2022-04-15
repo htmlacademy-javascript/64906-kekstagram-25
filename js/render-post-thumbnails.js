@@ -1,19 +1,43 @@
+import {openModal} from './fullsize-image.js';
+
+let postsData = [];
 const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesFragment = document.createDocumentFragment();
 
-const renderPostThumbnails = (photoDescriptions) => {
-  picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
+function initPosts(posts) {
+  postsData = posts;
+}
 
-  photoDescriptions.forEach(({url, likes, comments}) => {
+function removePostThumbnails() {
+  picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
+}
+
+function renderPostThumbnails(posts) {
+  removePostThumbnails();
+  posts.forEach((post) => {
     const pictureElement = picturesTemplate.cloneNode(true);
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
+    pictureElement.dataset.postId = post.id;
+    pictureElement.querySelector('.picture__img').src = post.url;
+    pictureElement.querySelector('.picture__comments').textContent = post.comments.length;
+    pictureElement.querySelector('.picture__likes').textContent = post.likes;
     picturesFragment.appendChild(pictureElement);
   });
 
   picturesContainer.appendChild(picturesFragment);
-};
+}
 
-export {renderPostThumbnails};
+picturesContainer.addEventListener('click', (evt) => {
+  const thumbnailElement = evt.target.closest('.picture');
+  if(!thumbnailElement) {
+    return;
+  }
+
+  const postId = thumbnailElement.dataset.postId;
+  const postData = postsData.find((post) => post.id === Number(postId));
+  if(postData) {
+    openModal(postData);
+  }
+});
+
+export {renderPostThumbnails, initPosts};
