@@ -4,7 +4,7 @@ const bodyElement = document.body;
 const successMsgTemplate = document.querySelector('#success').content.querySelector('.success');
 const failureMsgTemplate = document.querySelector('#error').content.querySelector('.error');
 
-const showSuccessNotification = () => {
+function showSuccessNotification() {
   const successMsgElement = successMsgTemplate.cloneNode(true);
   const removeSuccessMsgBtnElement = successMsgElement.querySelector('.success__button');
   removeSuccessMsgBtnElement.addEventListener('click', () => successMsgElement.remove());
@@ -24,9 +24,9 @@ const showSuccessNotification = () => {
       successMsgElement.remove();
     }
   });
-};
+}
 
-const showFailureNotification = () => {
+function showFailureNotification() {
   const failureMsgElement = failureMsgTemplate.cloneNode(true);
   const removeFailureMsgBtnElement = failureMsgElement.querySelector('.error__button');
   removeFailureMsgBtnElement.addEventListener('click', () => failureMsgElement.remove());
@@ -46,9 +46,9 @@ const showFailureNotification = () => {
       failureMsgElement.remove();
     }
   });
-};
+}
 
-const showAlert = (errorMsg) => {
+function showAlert(errorMsg) {
   const errorMsgContainer = document.createElement('div');
   const errorMsgCloseBtn = document.createElement('button');
   errorMsgCloseBtn.classList.add('error-msg__close-btn');
@@ -56,8 +56,7 @@ const showAlert = (errorMsg) => {
   errorMsgContainer.textContent = errorMsg;
   errorMsgContainer.appendChild(errorMsgCloseBtn);
   document.body.appendChild(errorMsgContainer);
-
   errorMsgCloseBtn.addEventListener('click', () => errorMsgContainer.remove());
-};
+}
 
 export {showSuccessNotification, showFailureNotification, showAlert};

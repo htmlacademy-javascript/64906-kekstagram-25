@@ -9,6 +9,7 @@ const overlayElement = document.querySelector('.big-picture');
 const largeImageElement = overlayElement.querySelector('.big-picture__img img');
 const largeImageLikesElement = overlayElement.querySelector('.likes-count');
 const largeImageCommentsListElement = overlayElement.querySelector('.social__comments');
+const commentTemplateElement = overlayElement.querySelector('.social__comment').cloneNode(true);
 const renderedCommentsCountElement = document.querySelector('.rendered-comments');
 const commentsCounterElement = overlayElement.querySelector('.comments-count');
 const largeImageDescriptionElement = overlayElement.querySelector('.social__caption');
@@ -22,32 +23,31 @@ function onCloseFromKeyboard(evt) {
   }
 }
 
-function setThumbnailsHandlers(posts) {
-  const picturesThumbnails = document.querySelectorAll('.picture');
-  picturesThumbnails.forEach((thumbnail, i) => {
-    thumbnail.addEventListener('click', (evt) => {
-      evt.preventDefault();
-      openModal(posts[i]);
-    });
-  });
-}
-
-function renderComment({avatar, name, message}) {
+function makeCommentElement({avatar, name, message}) {
   newCommentsLoaderElement.classList.add('hidden');
   if(postComments.length) {
     newCommentsLoaderElement.classList.remove('hidden');
   }
-  const commentItem = document.createElement('li');
-  commentItem.classList.add('social__comment');
-  commentItem.innerHTML = `
-        <img
-            class="social__picture"
-            src="${avatar}"
-            alt="${name}"
-            width="35" height="35">
-        <p class="social__text">${message}</p>
-`;
-  largeImageCommentsListElement.appendChild(commentItem);
+  const commentElement = commentTemplateElement.cloneNode(true);
+  const commentPictureElement = commentElement.querySelector('.social__picture');
+  commentPictureElement.src = avatar;
+  commentPictureElement.alt = name;
+  commentElement.querySelector('.social__text').textContent = message;
+  return commentElement;
+}
+
+function renderComments(comments) {
+  const commentsFragment = document.createDocumentFragment();
+  comments.forEach((comment) => {
+    commentsFragment.appendChild(makeCommentElement(comment));
+  });
+  largeImageCommentsListElement.appendChild(commentsFragment);
+  renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
+}
+
+function clearComments() {
+  largeImageCommentsListElement.querySelectorAll('.social__comment')
+    .forEach((commentElement) => commentElement.remove());
 }
 
 function openModal({url, likes, comments, description}) {
@@ -56,14 +56,10 @@ function openModal({url, likes, comments, description}) {
   largeImageElement.src = url;
   largeImageLikesElement.textContent = likes;
   commentsCounterElement.textContent = comments.length;
-  largeImageCommentsListElement.querySelectorAll('.social__comment')
-    .forEach((commentElement) => commentElement.remove());
   largeImageDescriptionElement.textContent = description;
   postComments = [...comments];
-  postComments.splice(0, COMMENTS_CHUNK_COUNT).forEach((comment) => {
-    renderComment(comment);
-  });
-  renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
+  clearComments();
+  renderComments(postComments.splice(0, COMMENTS_CHUNK_COUNT));
   bodyElement.addEventListener('keydown', onCloseFromKeyboard);
 }
 
@@ -73,14 +69,8 @@ function closeModal() {
   bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
 }
 
-newCommentsLoaderElement.addEventListener(
-  'click',
-  () => {
-    postComments.splice(0, COMMENTS_CHUNK_COUNT).forEach((comment) => renderComment(comment));
-    renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
-  }
-);
+newCommentsLoaderElement.addEventListener('click', () => renderComments(postComments.splice(0, COMMENTS_CHUNK_COUNT)));
 
 closeBtnElement.addEventListener('click', closeModal);
 
-export {setThumbnailsHandlers};
+export {openModal};

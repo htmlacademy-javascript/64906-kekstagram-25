@@ -11,14 +11,14 @@ const imageScaleValueElement = document.querySelector('.scale__control--value');
 function decreaseScale() {
   if(imageScaleValueElement.value > SCALE_VALUE_MIN) {
     imageScaleValueElement.value = Number(imageScaleValueElement.value) - SCALE_STEP;
-    uploadedImageElement.style.transform = `scale(${  imageScaleValueElement.value / 100  })`;
+    uploadedImageElement.style.transform = `scale(${imageScaleValueElement.value / 100})`;
   }
 }
 
 function increaseScale() {
   if(imageScaleValueElement.value < SCALE_VALUE_MAX) {
     imageScaleValueElement.value = Number(imageScaleValueElement.value) + SCALE_STEP;
-    uploadedImageElement.style.transform = `scale(${  imageScaleValueElement.value / 100  })`;
+    uploadedImageElement.style.transform = `scale(${imageScaleValueElement.value / 100})`;
   }
 }
 

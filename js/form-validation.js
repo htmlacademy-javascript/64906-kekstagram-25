@@ -14,7 +14,7 @@ const pristine = new Pristine(uploadFormElement, {
   errorTextClass: 'invalid',
 });
 
-const initUploadFormValidation = (onSuccessValidation) => {
+function initUploadFormValidation(onSuccessValidation) {
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -26,7 +26,7 @@ const initUploadFormValidation = (onSuccessValidation) => {
       onSuccessValidation(formData);
     }
   });
-};
+}
 
 pristine.addValidator(
   hashtagInputElement,

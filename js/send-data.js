@@ -1,4 +1,4 @@
-const uploadImage = (formData, onSuccess, onFail) => {
+function uploadImage(formData, onSuccess, onFail) {
   fetch('https://25.javascript.pages.academy/kekstagram', {
     method: 'POST',
     body: formData
@@ -13,6 +13,6 @@ const uploadImage = (formData, onSuccess, onFail) => {
     .catch(() => {
       onFail();
     });
-};
+}
 
 export {uploadImage};
