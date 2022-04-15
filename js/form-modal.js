@@ -18,15 +18,6 @@ const defaultImageEffectElement = document.querySelector('#effect-none');
 const uploadBtnElement = document.querySelector('.img-upload__submit');
 const closeBtnElement = uploadOverlayElement.querySelector('.img-upload__cancel');
 
-closeBtnElement.addEventListener('click', closeUploadWindow);
-
-function onCloseFromKeyboard(evt) {
-  if(isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeUploadWindow();
-  }
-}
-
 function openUploadWindow() {
   imageEffectLevelElement.classList.add('hidden');
   uploadOverlayElement.classList.remove('hidden');
@@ -64,9 +55,18 @@ function uploadChosenImage() {
   }
 }
 
+function onCloseFromKeyboard(evt) {
+  if(isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeUploadWindow();
+  }
+}
+
 uploadControlElement.addEventListener('change', () => {
   openUploadWindow();
   uploadChosenImage();
 });
+
+closeBtnElement.addEventListener('click', closeUploadWindow);
 
 export {closeUploadWindow};
