@@ -23,7 +23,7 @@ function openUploadWindow() {
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   imageScaleValueElement.value = IMAGE_SCALE_VALUE;
-  bodyElement.addEventListener('keydown', onCloseFromKeyboard);
+  bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function closeUploadWindow() {
@@ -38,7 +38,7 @@ function closeUploadWindow() {
   uploadBtnElement.disabled = false;
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
+  bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function uploadChosenImage() {
@@ -55,7 +55,7 @@ function uploadChosenImage() {
   }
 }
 
-function onCloseFromKeyboard(evt) {
+function closeFromKeyboardHandler(evt) {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeUploadWindow();
