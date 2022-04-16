@@ -1,7 +1,8 @@
 import {isEscapeKey, checkStringLength} from './utils.js';
 
-const COMMENT_MAX_LENGTH = 140;
+const MAX_NUMBER_HASHTAGS = 5;
 const HASHTAG_REG_EXP = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const COMMENT_MAX_LENGTH = 140;
 
 const hashtagInputElement = document.querySelector('.text__hashtags');
 const descriptionAreaElement = document.querySelector('.text__description');
@@ -46,7 +47,7 @@ pristine.addValidator(
   hashtagInputElement,
   (value) => {
     const hashtags = value.split(' ');
-    return hashtags.length <= 5;
+    return hashtags.length <= MAX_NUMBER_HASHTAGS;
   },
   'Нельзя указать больше пяти хэш-тегов',
   1,
