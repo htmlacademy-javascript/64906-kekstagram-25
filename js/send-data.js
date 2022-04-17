@@ -1,5 +1,7 @@
+const KEKSTAGRAM_UPLOAD_SERVER = 'https://25.javascript.pages.academy/kekstagram';
+
 function uploadImage(formData, onSuccess, onFail) {
-  fetch('https://25.javascript.pages.academy/kekstagram', {
+  fetch(KEKSTAGRAM_UPLOAD_SERVER, {
     method: 'POST',
     body: formData
   })

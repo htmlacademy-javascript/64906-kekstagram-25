@@ -1,3 +1,4 @@
+import {pristine} from './form-validation.js';
 import {isEscapeKey} from './utils.js';
 import {showAlert} from './notifications.js';
 
@@ -22,23 +23,24 @@ function openUploadWindow() {
   imageEffectLevelElement.classList.add('hidden');
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
-  bodyElement.addEventListener('keydown', onCloseFromKeyboard);
+  imageScaleValueElement.value = `${IMAGE_SCALE_VALUE}%`;
+  bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function closeUploadWindow() {
   uploadedImageElement.removeAttribute('style');
   uploadedImageElement.removeAttribute('class');
   uploadControlElement.value = '';
-  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
+  imageScaleValueElement.value = `${IMAGE_SCALE_VALUE}%`;
   imageEffectLevelValueElement.value = '';
   hashtagInputElement.value = '';
   descriptionAreaElement.value = '';
   defaultImageEffectElement.checked = true;
   uploadBtnElement.disabled = false;
+  pristine.reset();
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
+  bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function uploadChosenImage() {
@@ -55,7 +57,7 @@ function uploadChosenImage() {
   }
 }
 
-function onCloseFromKeyboard(evt) {
+function closeFromKeyboardHandler(evt) {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeUploadWindow();

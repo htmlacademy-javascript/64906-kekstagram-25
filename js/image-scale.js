@@ -8,20 +8,20 @@ const scaleIncrementElement = scaleElement.querySelector('.scale__control--bigge
 const uploadedImageElement = document.querySelector('.img-upload__preview img');
 const imageScaleValueElement = document.querySelector('.scale__control--value');
 
-function decreaseScale() {
-  if(imageScaleValueElement.value > SCALE_VALUE_MIN) {
-    imageScaleValueElement.value = Number(imageScaleValueElement.value) - SCALE_STEP;
-    uploadedImageElement.style.transform = `scale(${imageScaleValueElement.value / 100})`;
+function decreaseScaleHandler() {
+  if(parseFloat(imageScaleValueElement.value) > SCALE_VALUE_MIN) {
+    imageScaleValueElement.value = `${parseFloat(imageScaleValueElement.value) - SCALE_STEP}%`;
+    uploadedImageElement.style.transform = `scale(${parseFloat(imageScaleValueElement.value) / 100})`;
   }
 }
 
-function increaseScale() {
-  if(imageScaleValueElement.value < SCALE_VALUE_MAX) {
-    imageScaleValueElement.value = Number(imageScaleValueElement.value) + SCALE_STEP;
-    uploadedImageElement.style.transform = `scale(${imageScaleValueElement.value / 100})`;
+function increaseScaleHandler() {
+  if(parseFloat(imageScaleValueElement.value) < SCALE_VALUE_MAX) {
+    imageScaleValueElement.value = `${parseFloat(imageScaleValueElement.value) + SCALE_STEP}%`;
+    uploadedImageElement.style.transform = `scale(${parseFloat(imageScaleValueElement.value) / 100})`;
   }
 }
 
-scaleDecrementElement.addEventListener('click', decreaseScale);
+scaleDecrementElement.addEventListener('click', decreaseScaleHandler);
 
-scaleIncrementElement.addEventListener('click', increaseScale);
+scaleIncrementElement.addEventListener('click', increaseScaleHandler);

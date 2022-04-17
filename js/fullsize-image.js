@@ -19,7 +19,7 @@ const closeBtnElement = overlayElement.querySelector('.big-picture__cancel');
 function onCloseFromKeyboard(evt) {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    closeModal();
+    closeModalHandler();
   }
 }
 
@@ -63,7 +63,7 @@ function openModal({url, likes, comments, description}) {
   bodyElement.addEventListener('keydown', onCloseFromKeyboard);
 }
 
-function closeModal() {
+function closeModalHandler() {
   bodyElement.classList.remove('modal-open');
   overlayElement.classList.add('hidden');
   bodyElement.removeEventListener('keydown', onCloseFromKeyboard);
@@ -71,6 +71,6 @@ function closeModal() {
 
 newCommentsLoaderElement.addEventListener('click', () => renderComments(postComments.splice(0, COMMENTS_CHUNK_COUNT)));
 
-closeBtnElement.addEventListener('click', closeModal);
+closeBtnElement.addEventListener('click', closeModalHandler);
 
 export {openModal};

@@ -6,46 +6,56 @@ const failureMsgTemplate = document.querySelector('#error').content.querySelecto
 
 function showSuccessNotification() {
   const successMsgElement = successMsgTemplate.cloneNode(true);
-  const removeSuccessMsgBtnElement = successMsgElement.querySelector('.success__button');
-  removeSuccessMsgBtnElement.addEventListener('click', () => successMsgElement.remove());
   bodyElement.insertAdjacentElement('beforeend', successMsgElement);
 
-  const successMessageOverlay = document.querySelector('.success');
+  const successMsgOverlay = document.querySelector('.success');
 
-  successMessageOverlay.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('success')) {
+  function closeOutsideOverlay(evt) {
+    if(evt.target.classList.contains('success') || evt.target.classList.contains('success__button')) {
       successMsgElement.remove();
+      successMsgOverlay.removeEventListener('click', closeOutsideOverlay);
+      bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
     }
-  });
+  }
 
-  bodyElement.addEventListener('keydown', (evt) => {
+  function closeFromKeyboardHandler(evt) {
     if(isEscapeKey(evt)) {
       evt.preventDefault();
       successMsgElement.remove();
+      successMsgOverlay.removeEventListener('click', closeOutsideOverlay);
+      bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
     }
-  });
+  }
+
+  successMsgOverlay.addEventListener('click', closeOutsideOverlay);
+  bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function showFailureNotification() {
   const failureMsgElement = failureMsgTemplate.cloneNode(true);
-  const removeFailureMsgBtnElement = failureMsgElement.querySelector('.error__button');
-  removeFailureMsgBtnElement.addEventListener('click', () => failureMsgElement.remove());
   bodyElement.insertAdjacentElement('beforeend', failureMsgElement);
 
-  const errorMessageOverlay = document.querySelector('.error');
+  const errorMsgOverlay = document.querySelector('.error');
 
-  errorMessageOverlay.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('error')) {
+  function closeOutsideOverlay(evt) {
+    if(evt.target.classList.contains('error') || evt.target.classList.contains('error__button')) {
       failureMsgElement.remove();
+      errorMsgOverlay.removeEventListener('click', closeOutsideOverlay);
+      bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
     }
-  });
+  }
 
-  bodyElement.addEventListener('keydown', (evt) => {
+  function closeFromKeyboardHandler(evt) {
     if(isEscapeKey(evt)) {
       evt.preventDefault();
       failureMsgElement.remove();
+      errorMsgOverlay.removeEventListener('click', closeOutsideOverlay);
+      bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
     }
-  });
+  }
+
+  errorMsgOverlay.addEventListener('click', closeOutsideOverlay);
+  bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
 }
 
 function showAlert(errorMsg) {
