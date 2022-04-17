@@ -23,7 +23,7 @@ function openUploadWindow() {
   imageEffectLevelElement.classList.add('hidden');
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
+  imageScaleValueElement.value = `${IMAGE_SCALE_VALUE}%`;
   bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
 }
 
@@ -31,7 +31,7 @@ function closeUploadWindow() {
   uploadedImageElement.removeAttribute('style');
   uploadedImageElement.removeAttribute('class');
   uploadControlElement.value = '';
-  imageScaleValueElement.value = IMAGE_SCALE_VALUE;
+  imageScaleValueElement.value = `${IMAGE_SCALE_VALUE}%`;
   imageEffectLevelValueElement.value = '';
   hashtagInputElement.value = '';
   descriptionAreaElement.value = '';
