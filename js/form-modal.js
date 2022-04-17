@@ -1,3 +1,4 @@
+import {pristine} from './form-validation.js';
 import {isEscapeKey} from './utils.js';
 import {showAlert} from './notifications.js';
 
@@ -36,6 +37,7 @@ function closeUploadWindow() {
   descriptionAreaElement.value = '';
   defaultImageEffectElement.checked = true;
   uploadBtnElement.disabled = false;
+  pristine.reset();
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);

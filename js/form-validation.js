@@ -79,4 +79,4 @@ descriptionAreaElement.addEventListener('keydown', (evt) => {
   }
 });
 
-export {initUploadFormValidation};
+export {initUploadFormValidation, pristine};
