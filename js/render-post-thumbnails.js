@@ -5,15 +5,15 @@ const picturesContainer = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesFragment = document.createDocumentFragment();
 
-function initPosts(posts) {
+const initPosts = (posts) => {
   postsData = posts;
-}
+};
 
-function removePostThumbnails() {
+const removePostThumbnails = () => {
   picturesContainer.querySelectorAll('.picture').forEach((post) => post.remove());
-}
+};
 
-function renderPostThumbnails(posts) {
+const renderPostThumbnails = (posts) => {
   removePostThumbnails();
   posts.forEach((post) => {
     const pictureElement = picturesTemplate.cloneNode(true);
@@ -25,7 +25,7 @@ function renderPostThumbnails(posts) {
   });
 
   picturesContainer.appendChild(picturesFragment);
-}
+};
 
 picturesContainer.addEventListener('click', (evt) => {
   const thumbnailElement = evt.target.closest('.picture');

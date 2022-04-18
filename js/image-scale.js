@@ -8,20 +8,20 @@ const scaleIncrementElement = scaleElement.querySelector('.scale__control--bigge
 const uploadedImageElement = document.querySelector('.img-upload__preview img');
 const imageScaleValueElement = document.querySelector('.scale__control--value');
 
-function decreaseScaleHandler() {
+const decreaseScaleClickHandler = () => {
   if(parseFloat(imageScaleValueElement.value) > SCALE_VALUE_MIN) {
     imageScaleValueElement.value = `${parseFloat(imageScaleValueElement.value) - SCALE_STEP}%`;
     uploadedImageElement.style.transform = `scale(${parseFloat(imageScaleValueElement.value) / 100})`;
   }
-}
+};
 
-function increaseScaleHandler() {
+const increaseScaleClickHandler = () => {
   if(parseFloat(imageScaleValueElement.value) < SCALE_VALUE_MAX) {
     imageScaleValueElement.value = `${parseFloat(imageScaleValueElement.value) + SCALE_STEP}%`;
     uploadedImageElement.style.transform = `scale(${parseFloat(imageScaleValueElement.value) / 100})`;
   }
-}
+};
 
-scaleDecrementElement.addEventListener('click', decreaseScaleHandler);
+scaleDecrementElement.addEventListener('click', decreaseScaleClickHandler);
 
-scaleIncrementElement.addEventListener('click', increaseScaleHandler);
+scaleIncrementElement.addEventListener('click', increaseScaleClickHandler);

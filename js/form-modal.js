@@ -19,15 +19,15 @@ const defaultImageEffectElement = document.querySelector('#effect-none');
 const uploadBtnElement = document.querySelector('.img-upload__submit');
 const closeBtnElement = uploadOverlayElement.querySelector('.img-upload__cancel');
 
-function openUploadWindow() {
+const openUploadWindow = () => {
   imageEffectLevelElement.classList.add('hidden');
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   imageScaleValueElement.value = `${IMAGE_SCALE_VALUE}%`;
   bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
-}
+};
 
-function closeUploadWindow() {
+const closeUploadWindow = () => {
   uploadedImageElement.removeAttribute('style');
   uploadedImageElement.removeAttribute('class');
   uploadControlElement.value = '';
@@ -41,9 +41,9 @@ function closeUploadWindow() {
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   bodyElement.removeEventListener('keydown', closeFromKeyboardHandler);
-}
+};
 
-function uploadChosenImage() {
+const uploadChosenImage = () => {
   const image = uploadControlElement.files[0];
   const imageName = image.name.toLowerCase();
 
@@ -55,7 +55,7 @@ function uploadChosenImage() {
     showAlert(INCORRECT_IMAGE_FORMAT);
     closeUploadWindow();
   }
-}
+};
 
 function closeFromKeyboardHandler(evt) {
   if(isEscapeKey(evt)) {

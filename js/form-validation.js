@@ -1,7 +1,7 @@
 import {isEscapeKey, checkStringLength} from './utils.js';
 
 const MAX_NUMBER_HASHTAGS = 5;
-const HASHTAG_REG_EXP = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const HASHTAG_REG_EXP = /^#[A-Za-zА-Яа-яЁё\d]{1,19}$/;
 const COMMENT_MAX_LENGTH = 140;
 
 const hashtagInputElement = document.querySelector('.text__hashtags');
@@ -15,7 +15,7 @@ const pristine = new Pristine(uploadFormElement, {
   errorTextClass: 'invalid',
 });
 
-function initUploadFormValidation(onSuccessValidation) {
+const initUploadFormValidation = (onSuccessValidation) => {
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -27,7 +27,7 @@ function initUploadFormValidation(onSuccessValidation) {
       onSuccessValidation(formData);
     }
   });
-}
+};
 
 pristine.addValidator(
   hashtagInputElement,
