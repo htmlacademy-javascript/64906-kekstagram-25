@@ -11,10 +11,10 @@ const effectLevelElement = document.querySelector('.effect-level');
 const effectLevelValueElement = effectLevelElement.querySelector('.effect-level__value');
 const imageScaleValueElement = document.querySelector('.scale__control--value');
 
-function setEffectValue() {
+const setEffectValue = () => {
   effectLevelValueElement.value = sliderElement.noUiSlider.get();
   uploadedImageElement.style.filter = `${CURRENT_EFFECT.effect}(${effectLevelValueElement.value}${CURRENT_EFFECT.unit})`;
-}
+};
 
 noUiSlider.create(sliderElement, {
   range: {

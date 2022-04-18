@@ -3,16 +3,16 @@ import {closeUploadWindow} from './form-modal.js';
 import {showFailureNotification, showSuccessNotification} from './notifications.js';
 import {uploadImage} from './send-data.js';
 
-function uploadFormSubmitHandler(formData) {
-  function uploadSuccessHandler() {
+const uploadFormSubmitHandler = (formData) => {
+  const uploadSuccessHandler = () => {
     showSuccessNotification();
     closeUploadWindow();
-  }
-  function uploadFailHandler() {
+  };
+  const uploadFailHandler = () => {
     showFailureNotification();
     closeUploadWindow();
-  }
+  };
   uploadImage(formData, uploadSuccessHandler, uploadFailHandler);
-}
+};
 
 initUploadFormValidation(uploadFormSubmitHandler);

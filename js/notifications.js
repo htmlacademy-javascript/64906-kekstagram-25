@@ -4,7 +4,7 @@ const bodyElement = document.body;
 const successMsgTemplate = document.querySelector('#success').content.querySelector('.success');
 const failureMsgTemplate = document.querySelector('#error').content.querySelector('.error');
 
-function showSuccessNotification() {
+const showSuccessNotification = () => {
   const successMsgElement = successMsgTemplate.cloneNode(true);
   bodyElement.insertAdjacentElement('beforeend', successMsgElement);
 
@@ -29,9 +29,9 @@ function showSuccessNotification() {
 
   successMsgOverlay.addEventListener('click', closeOutsideOverlay);
   bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
-}
+};
 
-function showFailureNotification() {
+const showFailureNotification = () => {
   const failureMsgElement = failureMsgTemplate.cloneNode(true);
   bodyElement.insertAdjacentElement('beforeend', failureMsgElement);
 
@@ -56,9 +56,9 @@ function showFailureNotification() {
 
   errorMsgOverlay.addEventListener('click', closeOutsideOverlay);
   bodyElement.addEventListener('keydown', closeFromKeyboardHandler);
-}
+};
 
-function showAlert(errorMsg) {
+const showAlert = (errorMsg) => {
   const errorMsgContainer = document.createElement('div');
   const errorMsgCloseBtn = document.createElement('button');
   errorMsgCloseBtn.classList.add('error-msg__close-btn');
@@ -67,6 +67,6 @@ function showAlert(errorMsg) {
   errorMsgContainer.appendChild(errorMsgCloseBtn);
   document.body.appendChild(errorMsgContainer);
   errorMsgCloseBtn.addEventListener('click', () => errorMsgContainer.remove());
-}
+};
 
 export {showSuccessNotification, showFailureNotification, showAlert};

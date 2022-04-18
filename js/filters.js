@@ -8,7 +8,7 @@ const imageFiltersElement = document.querySelector('.img-filters');
 const imageFiltersListElement = imageFiltersElement.querySelector('.img-filters__form');
 const imageFilterBtnElement = imageFiltersListElement.querySelectorAll('.img-filters__button');
 
-function filterItems (photos, filter) {
+const filterItems = (photos, filter) => {
   if(filter.id.endsWith('default')) {
     renderPostThumbnails(photos);
   }
@@ -20,13 +20,13 @@ function filterItems (photos, filter) {
     photos.sort((previousPhoto, nextPhoto) => nextPhoto.comments.length - previousPhoto.comments.length);
     renderPostThumbnails(photos);
   }
-}
+};
 
-function showFilters () {
+const showFilters = () => {
   imageFiltersElement.classList.remove('img-filters--inactive');
-}
+};
 
-function setFilterHandlers (photos) {
+const setFilterHandlers = (photos) => {
   const filterHandler = debounce(filterItems, DEBOUNCE_TIME);
 
   imageFilterBtnElement.forEach((filterBtn) => {
@@ -41,6 +41,6 @@ function setFilterHandlers (photos) {
     });
     evt.target.classList.add('img-filters__button--active');
   });
-}
+};
 
 export {showFilters, setFilterHandlers};

@@ -16,14 +16,14 @@ const largeImageDescriptionElement = overlayElement.querySelector('.social__capt
 const newCommentsLoaderElement = overlayElement.querySelector('.comments-loader');
 const closeBtnElement = overlayElement.querySelector('.big-picture__cancel');
 
-function onCloseFromKeyboard(evt) {
+const onCloseFromKeyboard = (evt) => {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeModalHandler();
   }
-}
+};
 
-function makeCommentElement({avatar, name, message}) {
+const makeCommentElement = ({avatar, name, message}) => {
   newCommentsLoaderElement.classList.add('hidden');
   if(postComments.length) {
     newCommentsLoaderElement.classList.remove('hidden');
@@ -34,23 +34,23 @@ function makeCommentElement({avatar, name, message}) {
   commentPictureElement.alt = name;
   commentElement.querySelector('.social__text').textContent = message;
   return commentElement;
-}
+};
 
-function renderComments(comments) {
+const renderComments = (comments) => {
   const commentsFragment = document.createDocumentFragment();
   comments.forEach((comment) => {
     commentsFragment.appendChild(makeCommentElement(comment));
   });
   largeImageCommentsListElement.appendChild(commentsFragment);
   renderedCommentsCountElement.textContent = largeImageCommentsListElement.querySelectorAll('.social__comment').length;
-}
+};
 
-function clearComments() {
+const clearComments = () => {
   largeImageCommentsListElement.querySelectorAll('.social__comment')
     .forEach((commentElement) => commentElement.remove());
-}
+};
 
-function openModal({url, likes, comments, description}) {
+const openModal = ({url, likes, comments, description}) => {
   bodyElement.classList.add('modal-open');
   overlayElement.classList.remove('hidden');
   largeImageElement.src = url;
@@ -61,7 +61,7 @@ function openModal({url, likes, comments, description}) {
   clearComments();
   renderComments(postComments.splice(0, COMMENTS_CHUNK_COUNT));
   bodyElement.addEventListener('keydown', onCloseFromKeyboard);
-}
+};
 
 function closeModalHandler() {
   bodyElement.classList.remove('modal-open');

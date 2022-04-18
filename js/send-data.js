@@ -1,6 +1,6 @@
 const KEKSTAGRAM_UPLOAD_SERVER = 'https://25.javascript.pages.academy/kekstagram';
 
-function uploadImage(formData, onSuccess, onFail) {
+const uploadImage = (formData, onSuccess, onFail) => {
   fetch(KEKSTAGRAM_UPLOAD_SERVER, {
     method: 'POST',
     body: formData
@@ -15,6 +15,6 @@ function uploadImage(formData, onSuccess, onFail) {
     .catch(() => {
       onFail();
     });
-}
+};
 
 export {uploadImage};
